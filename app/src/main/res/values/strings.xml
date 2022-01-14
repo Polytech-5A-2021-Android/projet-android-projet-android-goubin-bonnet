@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AndroidProject</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bienvenue">Bienvenue sur notre application</string>
+    <string name="username">Username</string>
+    <string name="lastname">Lastname</string>
+    <string name="password">PassWord</string>
+    <string name="validate">Valider</string>
+    <string name="login">Login</string>
+    <string name="title">Dashboard</string>
+    <string name="create_account">Create Account</string>
+    <string name="man">Homme</string>
+    <string name="woman">Femme</string>
+    <string name="email">Email</string>
+    <string name="ville">Ville</string>
+    <string name="pays">Pays</string>
+    <string name="adresse">Adresse</string>
+    <string name="longitude">Latitude : </string>
+    <string name="latitude">Longitude : </string>
+    <string name="map_key" translatable="false">AIzaSyA64VjV9UgbD8bSuR9giTp8UkwFaLxaUU8 </string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>

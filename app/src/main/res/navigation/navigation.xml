@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/connexionFragment">
+
+    <fragment
+        android:id="@+id/connexionFragment"
+        android:name="com.example.androidproject.ConnexionFragment"
+        android:label="ConnexionFragment" >
+        <action
+            android:id="@+id/action_connexionFragment_to_createAccountFragment2"
+            app:destination="@id/createAccountFragment2" />
+        <action
+            android:id="@+id/action_connexionFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createAccountFragment2"
+        android:name="com.example.androidproject.CreateAccountFragment"
+        android:label="CreateAccountFragment" >
+        <action
+            android:id="@+id/action_createAccountFragment2_to_connexionFragment"
+            app:destination="@id/connexionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.androidproject.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <argument
+            android:name="user"
+            app:argType="com.example.androidproject.model.User" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.androidproject.TestFragment"
+        android:label="MapFragment" >
+        <argument
+            android:name="localisationId"
+            app:argType="long" />
+    </fragment>
+</navigation>
