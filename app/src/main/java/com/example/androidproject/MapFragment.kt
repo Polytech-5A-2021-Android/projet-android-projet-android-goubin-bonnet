@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class TestFragment : Fragment() {
+class MapFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private lateinit var mMap: GoogleMap
     private lateinit var viewModel: LocalisationViewModel
@@ -27,7 +27,7 @@ class TestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val args = TestFragmentArgs.fromBundle(requireArguments())
+        val args = MapFragmentArgs.fromBundle(requireArguments())
         val application = requireNotNull(this.activity).application
         val dataSource = DatabaseLocalisation.getInstance(application).localisationDao
         val viewModelFactory = LocalisationViewModelFactory(dataSource, application, args.localisationId)
@@ -49,7 +49,7 @@ class TestFragment : Fragment() {
                 val marker = LatLng(latitude.toDouble(), longitude.toDouble())
                 center = CameraUpdateFactory.newLatLng(marker)
                 var zoom: CameraUpdate
-                zoom = CameraUpdateFactory.zoomTo(6F)
+                zoom = CameraUpdateFactory.zoomTo(18F)
                 mMap.addMarker(
                     MarkerOptions().position(marker).title("Localisation de votre montre")
                 )

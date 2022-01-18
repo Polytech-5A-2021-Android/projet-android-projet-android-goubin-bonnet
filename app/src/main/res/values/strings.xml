@@ -20,5 +20,6 @@
     <string name="latitude">Longitude : </string>
     <string name="map_key" translatable="false">AIzaSyA64VjV9UgbD8bSuR9giTp8UkwFaLxaUU8 </string>
     <string name="title_activity_maps">Map</string>
+    <string name="rafraichir">Rafraîchir les localisations</string>
 
 </resources>

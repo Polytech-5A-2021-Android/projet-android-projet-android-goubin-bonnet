@@ -22,7 +22,6 @@ import com.example.androidproject.databinding.FragmentDashboardBinding
 import com.example.androidproject.model.Localisation
 import com.example.androidproject.viewModel.ConnexionViewModel
 import com.example.androidproject.viewModel.ListLocalisationViewModel
-import com.example.androidproject.viewModelFactory.ConnexionViewModelFactory
 import com.example.androidproject.viewModelFactory.ListLocalisationViewModelFactory
 
 class DashboardFragment : Fragment() {
@@ -48,6 +47,7 @@ class DashboardFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.apply {
             tvTitle.text = getString(R.string.title)
+            btRafraichir.text = getString(R.string.rafraichir)
 
         }
 
@@ -64,6 +64,12 @@ class DashboardFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
+
+        binding.btVoirAll.setOnClickListener {
+            this.findNavController().navigate(
+                DashboardFragmentDirections.actionDashboardFragmentToListLocalisationFragment()
+            )
+        }
 
         return binding.root
     }

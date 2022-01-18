@@ -129,7 +129,6 @@ class ConnexionViewModel (
             if (user == null) {
                 user = User()
                 user.id = insert(user)
-                var test = database.get(user.id)
                 var monUser = User(user.id + 1, "Fabien", "Fabien", "a", 1, "Fabien")
                 insert(monUser)
             }

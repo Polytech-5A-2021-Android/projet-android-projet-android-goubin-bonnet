@@ -9,12 +9,12 @@ import com.example.androidproject.viewModel.ListLocalisationViewModel
 class ListLocalisationViewModelFactory(
     private val dataSource: LocalisationDao,
     private val application: Application,
-    private val localisationId: Long = 0L
+    private val choice: Long = 0L
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ListLocalisationViewModel::class.java)) {
-            return ListLocalisationViewModel(dataSource, application, localisationId) as T
+            return ListLocalisationViewModel(dataSource, application, choice) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

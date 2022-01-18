@@ -8,7 +8,6 @@
             type="com.example.androidproject.viewModel.ListLocalisationViewModel" />
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,22 +31,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_rafraichir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/list"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:onClick="@{() -> viewModel.onRafraichir()}"
-            />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/bt_voirAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/bt_rafraichir"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>

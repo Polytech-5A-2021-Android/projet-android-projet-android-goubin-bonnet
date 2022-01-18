@@ -35,13 +35,25 @@
         <action
             android:id="@+id/action_dashboardFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_listLocalisationFragment"
+            app:destination="@id/listLocalisationFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.example.androidproject.TestFragment"
+        android:name="com.example.androidproject.MapFragment"
         android:label="MapFragment" >
         <argument
             android:name="localisationId"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/listLocalisationFragment"
+        android:name="com.example.androidproject.ListLocalisationFragment"
+        android:label="fragment_list_localisation"
+        tools:layout="@layout/fragment_list_localisation" >
+        <action
+            android:id="@+id/action_listLocalisationFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
 </navigation>

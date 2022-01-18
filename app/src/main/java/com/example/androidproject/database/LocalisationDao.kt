@@ -25,4 +25,6 @@ interface LocalisationDao {
 
     @Query("SELECT * FROM localisation")
     fun getLocalisations(): List<Localisation>?
+
+
 }
