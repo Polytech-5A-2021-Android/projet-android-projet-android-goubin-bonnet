@@ -26,6 +26,8 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var rootView = inflater.inflate(R.layout.fragment_map, container, false)
+
         // Inflate the layout for this fragment
         val args = MapFragmentArgs.fromBundle(requireArguments())
         val application = requireNotNull(this.activity).application
@@ -33,7 +35,6 @@ class MapFragment : Fragment() {
         val viewModelFactory = LocalisationViewModelFactory(dataSource, application, args.localisationId)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(LocalisationViewModel::class.java)
-        var rootView = inflater.inflate(R.layout.fragment_map, container, false)
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
@@ -47,14 +48,10 @@ class MapFragment : Fragment() {
 
             if (latitude != null && longitude != null) {
                 val marker = LatLng(latitude.toDouble(), longitude.toDouble())
-                center = CameraUpdateFactory.newLatLng(marker)
-                var zoom: CameraUpdate
-                zoom = CameraUpdateFactory.zoomTo(18F)
                 mMap.addMarker(
                     MarkerOptions().position(marker).title("Localisation de votre montre")
                 )
-                mMap.moveCamera(center)
-                mMap.animateCamera(zoom)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker, 15F))
 
             }
         }

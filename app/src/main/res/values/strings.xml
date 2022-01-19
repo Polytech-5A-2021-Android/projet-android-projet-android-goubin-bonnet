@@ -12,6 +12,7 @@
     <string name="create_account">Create Account</string>
     <string name="man">Homme</string>
     <string name="woman">Femme</string>
+    <string name="date">Date : </string>
     <string name="email">Email</string>
     <string name="ville">Ville</string>
     <string name="pays">Pays</string>
@@ -21,5 +22,7 @@
     <string name="map_key" translatable="false">AIzaSyA64VjV9UgbD8bSuR9giTp8UkwFaLxaUU8 </string>
     <string name="title_activity_maps">Map</string>
     <string name="rafraichir">Rafraîchir les localisations</string>
+    <string name="voirAll">Voir toutes les localisations</string>
+    <string name="voirWatch">Localisez ma montre</string>
 
 </resources>

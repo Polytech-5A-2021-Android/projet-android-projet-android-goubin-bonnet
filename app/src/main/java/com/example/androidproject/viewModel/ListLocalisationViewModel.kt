@@ -5,12 +5,11 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.androidproject.Event.Event
 import com.example.androidproject.MyApi
 import com.example.androidproject.database.LocalisationDao
 import com.example.androidproject.model.Localisation
 import kotlinx.coroutines.*
-import java.lang.Thread.sleep
-import java.lang.reflect.Array
 
 class ListLocalisationViewModel(
     val database: LocalisationDao,
@@ -29,6 +28,16 @@ class ListLocalisationViewModel(
     val response: LiveData<List<Localisation>>
         get() = _response
 
+    private val _idLocalisation = MutableLiveData<Long>()
+
+    val idLocalisation: LiveData<Long>
+        get() = _idLocalisation
+
+    private val statusMessage = MutableLiveData<Event<String>>()
+
+    val message : LiveData<Event<String>>
+        get() = statusMessage
+
     init {
         Log.i("ListLocalisViewModel", "created")
         initializeLocalisations()
@@ -46,11 +55,14 @@ class ListLocalisationViewModel(
                     localisation.id = _response.value?.get(i)!!.id
                     localisation.latitude = _response.value?.get(i)!!.latitude
                     localisation.longitude = _response.value?.get(i)!!.longitude
+                    localisation.date = _response.value?.get(i)!!.date
                     if (database.get(localisation.id) == null) {
                         database.insert(localisation)
                     }
                     if (choice == 0L) _localisations.value = database.getLast3Localisation()
                     else _localisations.value = database.getLocalisations()
+                    if (listResult.size == 0) statusMessage.value = Event("Vous n'êtes pas connecté à l'API !")
+
                 }
             } catch (e: Exception) {
                 _response.value = ArrayList()
@@ -61,6 +73,21 @@ class ListLocalisationViewModel(
     public fun onRafraichir() {
         _localisations.value = ArrayList()
         initializeLocalisations()
+    }
+
+    fun doneNavigating() {
+        _idLocalisation.value = null
+    }
+
+    fun getLastId() {
+        uiScope.launch {
+            var getPropertiesDeferred = MyApi.retrofitService.getLastLocation()
+            try {
+                var listResult = getPropertiesDeferred.await()
+                _idLocalisation.value = listResult.id
+            } catch (e: Exception) {
+            }
+        }
     }
 
     override fun onCleared() {

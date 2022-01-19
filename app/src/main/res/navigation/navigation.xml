@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_listLocalisationFragment"
             app:destination="@id/listLocalisationFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_mapFragment2"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"

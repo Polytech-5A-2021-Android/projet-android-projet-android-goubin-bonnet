@@ -22,7 +22,10 @@ data class Localisation(
     private var _latitude: Float = 0.0F,
 
     @ColumnInfo(name = "longitude")
-    private var _longitude: Float = 0.0F
+    private var _longitude: Float = 0.0F,
+
+    @ColumnInfo(name = "date")
+    private var _date: String? = ""
     ) : Parcelable,
     BaseObservable() {
     var id: Long
@@ -46,16 +49,25 @@ data class Localisation(
             notifyPropertyChanged(BR.longitude)
         }
 
+    var date: String?
+        @Bindable get() = _date
+        set(value) {
+            _date = value
+            notifyPropertyChanged(BR.date)
+        }
+
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readFloat(),
-        parcel.readFloat()
+        parcel.readFloat(),
+        parcel.readString()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)
         parcel.writeFloat(latitude)
         parcel.writeFloat(longitude)
+        parcel.writeString(date)
     }
 
     override fun describeContents(): Int {

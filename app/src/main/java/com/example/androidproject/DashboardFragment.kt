@@ -23,6 +23,7 @@ import com.example.androidproject.model.Localisation
 import com.example.androidproject.viewModel.ConnexionViewModel
 import com.example.androidproject.viewModel.ListLocalisationViewModel
 import com.example.androidproject.viewModelFactory.ListLocalisationViewModelFactory
+import com.google.android.gms.common.GooglePlayServicesUtil
 
 class DashboardFragment : Fragment() {
     private lateinit var binding: FragmentDashboardBinding
@@ -48,8 +49,17 @@ class DashboardFragment : Fragment() {
         binding.apply {
             tvTitle.text = getString(R.string.title)
             btRafraichir.text = getString(R.string.rafraichir)
+            btVoirAll.text = getString(R.string.voirAll)
+            btFindWatch.text = getString(R.string.voirWatch)
 
         }
+
+        viewModel.message.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
+                Toast.makeText(this.context, it, Toast.LENGTH_LONG).show()
+            }
+        })
+
 
         val adapter = LocalisationAdapter(LocalisationListener { localisationId ->
             this.findNavController().navigate(
@@ -71,6 +81,17 @@ class DashboardFragment : Fragment() {
             )
         }
 
+        viewModel.idLocalisation.observe(viewLifecycleOwner, Observer {
+                id ->
+            id?.let {
+                this.findNavController().navigate(
+                    DashboardFragmentDirections.actionDashboardFragmentToMapFragment2(id)
+                )
+                viewModel.doneNavigating()
+            }
+        })
+
+
         return binding.root
     }
 
@@ -79,6 +100,13 @@ class DashboardFragment : Fragment() {
         @BindingAdapter("localisationLat")
         fun TextView.setLong(item : Localisation) {
             text = item.longitude.toString()
+
+        }
+
+        @JvmStatic
+        @BindingAdapter("localisationDate")
+        fun TextView.setDate(item : Localisation) {
+            text = item.date.toString()
 
         }
 

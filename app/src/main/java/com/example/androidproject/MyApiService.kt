@@ -25,8 +25,8 @@ private val retrofit = Retrofit.Builder()
 interface MyApiService {
     @GET("/localisation/get_localisation_on_time")
     fun getLocalisation(): Deferred<List<Localisation>>
-    @GET("localisation/get_last_localisation")
-    fun getLastLocation(): Deferred<List<Localisation>>
+    @GET("/localisation/get_last_localisation")
+    fun getLastLocation(): Deferred<Localisation>
 }
 
 object MyApi {
