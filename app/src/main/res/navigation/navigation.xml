@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_mapFragment2"
             app:destination="@id/mapFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_modifierDistanceFragment"
+            app:destination="@id/modifierDistanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
@@ -59,4 +62,8 @@
             android:id="@+id/action_listLocalisationFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/modifierDistanceFragment"
+        android:name="com.example.androidproject.ModifierDistanceFragment"
+        android:label="ModifierDistanceFragment" />
 </navigation>

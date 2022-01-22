@@ -22,6 +22,7 @@ class LocalisationViewModel (
     val localisation: LiveData<Localisation>
         get() = _localisation
 
+
     init {
         Log.i("LocalisationViewModel", "created")
         initializeLocalisation()

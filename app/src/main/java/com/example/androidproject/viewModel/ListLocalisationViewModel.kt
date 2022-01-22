@@ -65,6 +65,7 @@ class ListLocalisationViewModel(
 
                 }
             } catch (e: Exception) {
+                 if (database.getLast3Localisation().size == 0) statusMessage.value = Event("Vous n'êtes pas connecté à l'API !")
                 _response.value = ArrayList()
             }
         }

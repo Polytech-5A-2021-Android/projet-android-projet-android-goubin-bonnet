@@ -51,6 +51,7 @@ class DashboardFragment : Fragment() {
             btRafraichir.text = getString(R.string.rafraichir)
             btVoirAll.text = getString(R.string.voirAll)
             btFindWatch.text = getString(R.string.voirWatch)
+            btModifierDistance.text = getString(R.string.modifierDistance)
 
         }
 
@@ -78,6 +79,12 @@ class DashboardFragment : Fragment() {
         binding.btVoirAll.setOnClickListener {
             this.findNavController().navigate(
                 DashboardFragmentDirections.actionDashboardFragmentToListLocalisationFragment()
+            )
+        }
+
+        binding.btModifierDistance.setOnClickListener {
+            this.findNavController().navigate(
+                DashboardFragmentDirections.actionDashboardFragmentToModifierDistanceFragment()
             )
         }
 

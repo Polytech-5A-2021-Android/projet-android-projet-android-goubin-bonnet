@@ -20,9 +20,9 @@
         app:strokeWidth="3dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/beige"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/my_gradient"
             android:padding="16dp">
             <TextView
                 android:id="@+id/tv_create_account"
