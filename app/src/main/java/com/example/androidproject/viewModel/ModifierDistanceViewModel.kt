@@ -6,11 +6,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.androidproject.Event.Event
+import com.example.androidproject.MyApi
 import com.example.androidproject.database.DistanceDao
 import com.example.androidproject.model.Distance
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class ModifierDistanceViewModel(
 
@@ -24,34 +26,61 @@ class ModifierDistanceViewModel(
     val distance: LiveData<Distance>
         get() = _distance
 
-    private val _distance2 = MutableLiveData<Distance>()
-    val distance2: LiveData<Distance>
-        get() = _distance2
+    private val _done = MutableLiveData<String>()
+    val done: LiveData<String>
+        get() = _done
 
     private val statusMessage = MutableLiveData<Event<String>>()
-
-    val message : LiveData<Event<String>>
+    val message: LiveData<Event<String>>
         get() = statusMessage
 
     init {
         Log.i("DistanceViewModel", "created")
-        var newDistance = Distance()
-        if (database.getLastDistance() == null) {
-            newDistance.distance = 13.5F
-            newDistance.id = database.insert(newDistance)
+
+        uiScope.launch {
+            var getPropertiesDeferred = MyApi.retrofitService.getDistance()
+            try {
+                var listResult = getPropertiesDeferred.await()
+                var newDistance = Distance()
+                newDistance.id = listResult.id
+                newDistance.distance = listResult.distance
+                database.insert(newDistance)
+                _distance.value = database.getLastDistance()
+                _done.value = "Done"
+            } catch (e: Exception) {
+            }
+
         }
-        _distance.value = database.getLastDistance()
     }
 
+    fun doneNavigating() {
+        _done.value = null
+    }
 
     fun onValidate(valueDistance: Float) {
         var oldDistance = database.getLastDistance()
         oldDistance?.distance = valueDistance
-        oldDistance?.let {
-            database.update(it)
-            statusMessage.value = Event("Distance modifié avec succés!")
-            _distance.value = database.getLastDistance()
+        uiScope.launch {
+            var getPropertiesDeferred =
+                oldDistance?.let { MyApi.retrofitService.putDistance(it) }
+            try {
+                var listResult = getPropertiesDeferred?.await()
+                var newDistance = Distance()
+                newDistance.id = listResult!!.id
+                newDistance.distance = listResult.distance
+                database.update(newDistance)
+                _distance.value = database.getLastDistance()
+                _done.value = "Done"
+                statusMessage.value = Event("Distance modifié avec succés!")
+
+            } catch (e: Exception) {
+            }
         }
+        //oldDistance?.let {
+        //  database.update(it)
+        //statusMessage.value = Event("Distance modifié avec succés!")
+        //_distance.value = database.getLastDistance()
+        //}
     }
 
 }

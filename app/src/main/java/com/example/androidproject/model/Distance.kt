@@ -51,12 +51,12 @@ data class Distance (
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Localisation> {
-        override fun createFromParcel(parcel: Parcel): Localisation {
-            return Localisation(parcel)
+    companion object CREATOR : Parcelable.Creator<Distance> {
+        override fun createFromParcel(parcel: Parcel): Distance {
+            return Distance(parcel)
         }
 
-        override fun newArray(size: Int): Array<Localisation?> {
+        override fun newArray(size: Int): Array<Distance?> {
             return arrayOfNulls(size)
         }
     }

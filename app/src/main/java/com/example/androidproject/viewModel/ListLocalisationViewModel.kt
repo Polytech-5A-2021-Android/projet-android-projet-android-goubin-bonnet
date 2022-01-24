@@ -61,7 +61,6 @@ class ListLocalisationViewModel(
                     }
                     if (choice == 0L) _localisations.value = database.getLast3Localisation()
                     else _localisations.value = database.getLocalisations()
-                    if (listResult.size == 0) statusMessage.value = Event("Vous n'êtes pas connecté à l'API !")
 
                 }
             } catch (e: Exception) {

@@ -56,9 +56,17 @@ class ModifierDistanceFragment : Fragment() {
 
         binding.btModifierDistanceLocalisation.setOnClickListener {
             viewModel.onValidate(slider.value)
-            var texte = viewModel.distance.value?.distance
-            binding.tvOldValue.text = getString(R.string.oldValue) + texte
         }
+
+        viewModel.done.observe(viewLifecycleOwner, Observer {
+                id ->
+            id?.let {
+                var texte = viewModel.distance.value?.distance
+                binding.tvOldValue.text = getString(R.string.oldValue) + " " + texte
+                viewModel.doneNavigating()
+            }
+        })
+
 
         viewModel.message.observe(viewLifecycleOwner, Observer {
             it.getContentIfNotHandled()?.let {

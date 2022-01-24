@@ -1,5 +1,6 @@
 package com.example.androidproject
 
+import com.example.androidproject.model.Distance
 import com.example.androidproject.model.Localisation
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -7,7 +8,10 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
 
 
 private const val BASE_URL = "http://10.0.2.2:5000"
@@ -27,6 +31,10 @@ interface MyApiService {
     fun getLocalisation(): Deferred<List<Localisation>>
     @GET("/localisation/get_last_localisation")
     fun getLastLocation(): Deferred<Localisation>
+    @PUT("/localisation/modify_distance")
+    fun putDistance(@Body distance: Distance): Deferred<Distance>
+    @GET("/localisation/get_distance")
+    fun getDistance(): Deferred<Distance>
 }
 
 object MyApi {
